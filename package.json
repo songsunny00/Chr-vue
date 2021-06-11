@@ -1,12 +1,17 @@
 {
   "name": "chr-vue",
-  "version": "0.1.0",
-  "private": true,
+  "version": "1.0.0",
+  "description": "染色体组件vue版",
+  "keywords": "chr chr-vue chromosome",
+  "author": "songsunny",
+  "private": false,
+  "main":"./dist/chr-vue.umd.min.js",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "test:unit": "vue-cli-service test:unit",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "lib":"vue-cli-service build --target lib --name chr-vue ./src/packages/index.js"
   },
   "dependencies": {
     "core-js": "^2.6.5",
