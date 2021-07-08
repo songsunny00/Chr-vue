@@ -2,7 +2,7 @@
  * @Author: songsunny
  * @Date: 2021-06-07 17:37:08
  * @LastEditors: songsunny
- * @LastEditTime: 2021-06-10 17:21:11
+ * @LastEditTime: 2021-07-08 15:48:50
  * @Description: 染色体组件
 -->
 <template>
@@ -40,6 +40,7 @@
 </template>
 
 <script>
+import {chrData} from './data'
 export default {
   name: 'Chr',
   props: {
@@ -94,6 +95,7 @@ export default {
     }
   },
   computed: {
+    dataObj() { return chrData }
   },
   watch: {
     isShowError(val) {
@@ -105,16 +107,19 @@ export default {
       this.handleErr()
     }
   },
-  async created() {
-    if (!this.data.length) {
-      const datas = await import('./data')
-      this.chrData = JSON.parse(datas.chrData[this.type])
-    } else {
-      this.chrData = JSON.parse(JSON.stringify(this.data))
+  created() {
+    try {
+      if (!this.data.length) {
+        this.chrData = JSON.parse(this.dataObj[this.type])
+      } else {
+        this.chrData = JSON.parse(JSON.stringify(this.data))
+      }
+      this.max = this.chrData[this.chrData.length - 1].stop
+      this.init()
+      if (this.isShowError) this.handleErr()
+    } catch (error) {
+      console.log(error)
     }
-    this.max = this.chrData[this.chrData.length - 1].stop
-    this.init()
-    if (this.isShowError) this.handleErr()
   },
   mounted() {
   },
